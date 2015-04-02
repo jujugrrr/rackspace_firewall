@@ -7,4 +7,4 @@ license 'Apache 2.0'
 description 'Provides default firewall configuration for Rackspace services'
 version '0.0.1'
 
-depends 'firewall', '~ 1.0'
+depends 'firewall', '~> 1.3.0'
