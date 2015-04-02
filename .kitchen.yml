@@ -1,0 +1,101 @@
+---
+driver:
+  name: vagrant
+driver_config:
+  require_chef_omnibus: true
+
+provisioner:
+  name: chef_zero
+  attributes:
+    authorization:
+      sudo:
+        users: ['vagrant']
+        passwordless: true
+    mysql:
+      server_root_password: "randompass"
+      server_repl_password: "randompass"
+      server_debian_password: "randompass"
+    holland:
+      password: "randompass"
+    stack_commons:
+      stackname: "phpstack"
+
+platforms:
+  - name: ubuntu-12.04
+    run_list:
+    - recipe[apt]
+  - name: ubuntu-14.04
+    run_list:
+    - recipe[apt]
+  - name: centos-6.5
+    run_list:
+    - recipe[yum]
+
+suites:
+  - name: default
+    run_list:
+      - recipe[stack_commons::mysql_base]
+      - recipe[stack_commons::postgresql_base]
+      - recipe[stack_commons::mongodb_standalone]
+      - recipe[stack_commons::memcached]
+      - recipe[stack_commons::varnish]
+      - recipe[stack_commons::rabbitmq]
+      - recipe[stack_commons::redis_single]
+      - recipe[phpstack::application_php]
+    attributes:
+      phpstack:
+        demo:
+          enabled: true
+
+  - name: aio-nginx
+    run_list:
+      - recipe[stack_commons::mysql_base]
+      - recipe[stack_commons::postgresql_base]
+      - recipe[stack_commons::mongodb_standalone]
+      - recipe[stack_commons::memcached]
+      - recipe[stack_commons::varnish]
+      - recipe[stack_commons::rabbitmq]
+      - recipe[stack_commons::redis_single]
+      - recipe[phpstack::application_php]
+    attributes:
+      phpstack:
+        webserver: "nginx"
+        demo:
+          enabled: true
+
+  - name: runlist
+    run_list:
+      - recipe[stack_commons::mysql_base]
+      - recipe[stack_commons::postgresql_base]
+      - recipe[stack_commons::mongodb_standalone]
+      - recipe[stack_commons::memcached]
+      - recipe[stack_commons::varnish]
+      - recipe[stack_commons::rabbitmq]
+      - recipe[stack_commons::redis_single]
+      - recipe[phpstack::application_php]
+      - recipe[wrapper::demo]
+    attributes:
+      phpstack:
+        demo:
+          enabled: true
+
+  - name: wrapper
+    run_list:
+      - recipe[wrapper]
+
+  - name: application-php-apache
+    run_list:
+      - recipe[phpstack::application_php]
+    attributes:
+      phpstack:
+        demo:
+          enabled: true
+
+  - name: application-php-nginx
+    run_list:
+      - recipe[phpstack::application_php]
+    attributes:
+      phpstack:
+        webserver: "nginx"
+        demo:
+          enabled: true

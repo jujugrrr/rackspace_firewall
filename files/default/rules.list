@@ -1,0 +1,20 @@
+# Rackspace Bastion access
+'INPUT', '72.3.128.84/32','ACCEPT', 500, 'Bastion'
+'INPUT', '69.20.0.1/32','ACCEPT', 501, 'Bastion'
+'INPUT', '50.57.22.125/32','ACCEPT', 502, 'Bastion'
+'INPUT', '120.136.34.22/32','ACCEPT', 503, 'Bastion'
+'INPUT', '212.100.225.49/32','ACCEPT', 504, 'Bastion'
+'INPUT', '212.100.225.42/32','ACCEPT', 505, 'Bastion'
+'INPUT', '119.9.4.2/32','ACCEPT', 506, 'Bastion'
+
+# Rackspace Cloud Monitoring
+'INPUT', '50.56.142.128/26','ACCEPT', 507, 'Monitoring'
+'INPUT', '50.57.61.0/26','ACCEPT', 508, 'Monitoring'
+'INPUT', '78.136.44.0/26','ACCEPT', 509, 'Monitoring'
+'INPUT', '180.150.149.64/26','ACCEPT', 510, 'Monitoring'
+'INPUT', '69.20.52.192/26','ACCEPT', 511, 'Monitoring'
+'INPUT', '92.52.126.0/24','ACCEPT', 512, 'Monitoring'
+
+# Rackspace Support
+'INPUT', '50.56.230.0/24','ACCEPT', 513, 'Support'
+'INPUT', '50.56.228.0/24','ACCEPT', 514, 'Support'
